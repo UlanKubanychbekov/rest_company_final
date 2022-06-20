@@ -2,13 +2,17 @@ package com.example.rest_company.service;
 
 import com.example.rest_company.dto.request.CompanyRequest;
 import com.example.rest_company.dto.response.CompanyResponse;
+import com.example.rest_company.dto.response.CompanyResponseView;
 import com.example.rest_company.entity.Company;
 import com.example.rest_company.mapper.edit.CompanyEditMapper;
 import com.example.rest_company.mapper.view.CompanyViewMapper;
 import com.example.rest_company.repository.CompanyRepo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -47,5 +51,25 @@ public class CompanyService {
 public List<CompanyResponse> getAllCompanies(){
         return companyViewMapper.view(companyRepo.findAll());
 
+    }
+
+    public CompanyResponseView getAllCompanyPagination(String text, int page, int size) {
+        CompanyResponseView responseView = new CompanyResponseView();
+        Pageable pageable = PageRequest.of(page-1, size);
+        responseView.setResponses(view(search(text,pageable)));
+        return responseView;
+    }
+
+    public List<CompanyResponse> view(List<Company> companies) {
+        List<CompanyResponse> responses = new ArrayList<>();
+        for (Company company : companies) {
+            responses.add(companyViewMapper.viewCompany(company));
+        }
+        return responses;
+    }
+
+    private List<Company> search(String name, Pageable pageable) {
+        String text = name == null ? "" : name;
+        return companyRepo.searchAndPagination(text.toUpperCase(), pageable);
     }
 }

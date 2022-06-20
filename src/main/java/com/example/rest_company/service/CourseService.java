@@ -1,16 +1,10 @@
 package com.example.rest_company.service;
 
-import com.example.rest_company.dto.request.CompanyRequest;
 import com.example.rest_company.dto.request.CourseRequest;
-import com.example.rest_company.dto.response.CompanyResponse;
 import com.example.rest_company.dto.response.CourseResponse;
-import com.example.rest_company.entity.Company;
 import com.example.rest_company.entity.Course;
-import com.example.rest_company.mapper.edit.CompanyEditMapper;
 import com.example.rest_company.mapper.edit.CourseEditMapper;
-import com.example.rest_company.mapper.view.CompanyViewMapper;
 import com.example.rest_company.mapper.view.CourseViewMapper;
-import com.example.rest_company.repository.CompanyRepo;
 import com.example.rest_company.repository.CourseRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
