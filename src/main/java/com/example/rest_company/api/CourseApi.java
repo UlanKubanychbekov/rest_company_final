@@ -6,6 +6,7 @@ import com.example.rest_company.dto.response.CompanyResponse;
 import com.example.rest_company.dto.response.CourseResponse;
 import com.example.rest_company.service.CompanyService;
 import com.example.rest_company.service.CourseService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +17,7 @@ import java.util.List;
  */
 @RestController
 @RequiredArgsConstructor
+@Tag(name = "Course API", description = "SUPER_ADMIN  can add , update ,delete")
 @RequestMapping("api/courses")
 public class CourseApi {
 
@@ -23,7 +25,7 @@ public class CourseApi {
 
         @PostMapping
         public CourseResponse create(@RequestBody CourseRequest request) {
-            return service.create(request);
+            return service.create(request.getCompanyId(),request);
         }
 
         @PutMapping("/update/{id}")

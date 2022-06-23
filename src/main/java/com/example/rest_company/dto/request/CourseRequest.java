@@ -11,4 +11,5 @@ import lombok.Setter;
 public class CourseRequest {
     private String courseName;
     private String data;
+    private Long companyId;
 }

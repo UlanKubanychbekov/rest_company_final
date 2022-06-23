@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import java.util.List;
 
 /**
  * author: Ulansky
@@ -20,4 +22,7 @@ public class Role {
     private Long id;
 
     private String roleName;
+
+    @OneToMany
+    private List<User> users;
 }

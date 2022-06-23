@@ -4,6 +4,7 @@ import com.example.rest_company.dto.request.StudentRequest;
 import com.example.rest_company.dto.response.StudentResponse;
 import com.example.rest_company.entity.Student;
 import com.example.rest_company.service.StudentService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
@@ -16,12 +17,13 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/students")
+@Tag(name = "Student API", description = "SUPER_ADMIN can add , update ,delete")
 public class StudentApi {
     private final StudentService service;
 
     @PostMapping
     public StudentResponse create(@RequestBody StudentRequest request) {
-        return service.create(request);
+        return service.create(request.getGroupId(),request);
 
     }
 

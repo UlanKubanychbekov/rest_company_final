@@ -24,7 +24,7 @@ public class TeacherViewMapper {
         teacherResponse.setFirstName(teacher.getFirstName());
         teacherResponse.setLastName(teacher.getLastName());
         teacherResponse.setEmail(teacher.getEmail());
-        teacherResponse.setEnabled(teacher.getEnabled());
+        teacherResponse.setEnabled(true);
         teacherResponse.setLocalDate(teacher.getLocalDate());
         return teacherResponse;
     }

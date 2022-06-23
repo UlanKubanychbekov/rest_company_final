@@ -24,7 +24,7 @@ public class StudentViewMapper {
         studentResponse.setLastname(student.getLastname());
         studentResponse.setEmail(student.getEmail());
         studentResponse.setStudyFormat(student.getStudyFormat());
-        studentResponse.setEnabled(student.getEnabled());
+        studentResponse.setEnabled(true);
         studentResponse.setLocalDate(student.getLocalDate());
 
         return studentResponse;

@@ -2,12 +2,15 @@ package com.example.rest_company.service;
 
 import com.example.rest_company.dto.request.StudentRequest;
 import com.example.rest_company.dto.response.StudentResponse;
+import com.example.rest_company.entity.Group;
 import com.example.rest_company.entity.Student;
 import com.example.rest_company.mapper.edit.StudentEditMapper;
 import com.example.rest_company.mapper.view.StudentViewMapper;
+import com.example.rest_company.repository.GroupRepo;
 import com.example.rest_company.repository.StudentRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.webjars.NotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,13 +22,18 @@ import java.util.List;
 @RequiredArgsConstructor
 public class StudentService {
 
+    private final GroupRepo groupRepo;
     private final StudentEditMapper editMapper;
     private final StudentViewMapper viewMapper;
     private final StudentRepo repo;
 
-    public StudentResponse create(StudentRequest studentRequest){
+    public StudentResponse create(Long id,StudentRequest studentRequest){
+        Group group = groupRepo.findById(id).orElseThrow(()->new NotFoundException(
+                "Group with "+ id+" id not found!"
+        ));
         Student student = editMapper.create(studentRequest);
         repo.save(student);
+        student.setGroup(group);
         return viewMapper.view(student);
     }
     public StudentResponse update(long id,StudentRequest request){

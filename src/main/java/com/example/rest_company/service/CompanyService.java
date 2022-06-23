@@ -55,7 +55,7 @@ public List<CompanyResponse> getAllCompanies(){
 
     public CompanyResponseView getAllCompanyPagination(String text, int page, int size) {
         CompanyResponseView responseView = new CompanyResponseView();
-        Pageable pageable = PageRequest.of(page-1, size);
+        Pageable pageable = PageRequest.of(page -1, size);
         responseView.setResponses(view(search(text,pageable)));
         return responseView;
     }

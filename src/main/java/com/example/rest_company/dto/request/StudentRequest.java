@@ -21,5 +21,6 @@ public class StudentRequest {
     private String email;
     @Enumerated(EnumType.STRING)
     private StudyFormat studyFormat;
+    private Long groupId;
 
 }

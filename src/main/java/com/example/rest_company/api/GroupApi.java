@@ -3,6 +3,7 @@ package com.example.rest_company.api;
 import com.example.rest_company.dto.request.GroupRequest;
 import com.example.rest_company.dto.response.GroupResponse;
 import com.example.rest_company.service.GroupService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/groups")
+@Tag(name = "Group API", description = "SUPER_ADMIN can add , update ,delete")
 public class GroupApi {
 
     private final GroupService service;
@@ -38,6 +40,7 @@ public class GroupApi {
     public GroupResponse findById(@PathVariable long id) {
         return service.findById(id);
     }
+
     @GetMapping("{id}")
     public List<GroupResponse> getAllGroups() {
         return service.getAllGroup();

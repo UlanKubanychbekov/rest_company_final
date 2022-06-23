@@ -38,21 +38,14 @@ public class JwtFilter extends GenericFilter {
                          ServletResponse servletResponse,
                          FilterChain filterChain) throws IOException, ServletException {
         String token = getTokenFromRequest((HttpServletRequest) servletRequest);
-//        System.out.println(token);
         {
-//            System.out.println("block");
             if (token != null && jwtProvider.validateToken(token)) {
-                System.out.println("if");
                 String email = jwtProvider.getEmailFromToken(token);
-                System.out.println(email);
                 CustomUserDetails customUserDetails = (CustomUserDetails) userDetService.loadUserByUsername(email);
-                System.out.println(customUserDetails);
                 UsernamePasswordAuthenticationToken aut =
                         new UsernamePasswordAuthenticationToken(customUserDetails, customUserDetails, customUserDetails.getAuthorities());
-                System.out.println(aut);
                 SecurityContextHolder.getContext().setAuthentication(aut);
             }
-            System.out.println("end");
             filterChain.doFilter(servletRequest, servletResponse);
         }
 
@@ -60,8 +53,7 @@ public class JwtFilter extends GenericFilter {
 
     public String getTokenFromRequest(HttpServletRequest request){
         String bear = request.getHeader(AUTHORIZATION);
-//        System.out.println(bear);
-        if(hasText(bear)&&bear.startsWith("Bearer")){
+        if(hasText(bear)&&bear.startsWith("Bearer ")){
             return bear.substring(7);
         }
         return  null;

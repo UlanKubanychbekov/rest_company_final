@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  * author: Ulansky
  */
 @Component
-public class Test {
+public class PasswordEnc {
 
     @Bean
     public PasswordEncoder passwordEncoder(){

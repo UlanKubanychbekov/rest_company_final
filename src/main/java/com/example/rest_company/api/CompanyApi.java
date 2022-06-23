@@ -18,8 +18,8 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/companies")
-@Tag(name = "Company API", description = "USER with role admin can add , update ,delete")
-@PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
+@Tag(name = "Company API", description = "SUPER_ADMIN can add , update ,delete")
+@PreAuthorize("hasAuthority('ADMIN')")
 public class CompanyApi {
 
     private final CompanyService service;
@@ -54,7 +54,7 @@ public class CompanyApi {
 
     }
     @GetMapping("search")
-    @Operation(summary = "Get allCompanyAndSearch", description = "we can get all studebts and search")
+    @Operation(summary = "Get allCompanyAndSearch", description = "we can get all company and search")
     public CompanyResponseView getAllCompanies(@RequestParam(name = "text", required = false)String text,
                                                @RequestParam int page,
                                                @RequestParam int size){

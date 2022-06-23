@@ -27,7 +27,7 @@ public class GroupViewMapper {
         groupResponse.setGroupName(group.getGroupName());
         groupResponse.setStartData(group.getStartData());
         groupResponse.setFinishDate(group.getFinishDate());
-        groupResponse.setEnabled(group.getEnabled());
+        groupResponse.setEnabled(true);
         groupResponse.setLocalDate(group.getLocalDate());
         return groupResponse;
     }

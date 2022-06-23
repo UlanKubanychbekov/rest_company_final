@@ -14,7 +14,6 @@ public class GroupResponse {
     private String groupName;
     private String startData;
     private String finishDate;
-    private String courseName;
     private LocalDate localDate;
     private Boolean enabled;
 

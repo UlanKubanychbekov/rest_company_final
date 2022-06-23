@@ -17,12 +17,11 @@ import org.springframework.stereotype.Component;
 public class UserService {
 
     private final UserRepo repo;
-    private final RoleRepo roleRepo;
     private final PasswordEncoder encoder;
 
     public User saveUser(User user) {
-//            Role userRole = roleRepo.findRoleName("Role_Admin");
         Role userRole = new Role();
+        userRole.setRoleName("ADMIN");
         user.setRole(userRole);
         user.setPassword(encoder.encode(user.getPassword()));
         return repo.save(user);
@@ -30,7 +29,6 @@ public class UserService {
 
     public User findByEmail(String email) {
         return repo.finByEmail(email);
-//            return null;
 
     }
 
@@ -40,9 +38,9 @@ public class UserService {
             if (encoder.matches(password, user.getPassword())) {
                 return user;
             } else {
-                throw new BadCredentialsException("invalid");
+                throw new BadCredentialsException("BadException");
             }
         }
-        throw new BadCredentialsException("invalid");
+        throw new BadCredentialsException("BadException");
     }
 }

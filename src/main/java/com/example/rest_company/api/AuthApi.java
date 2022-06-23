@@ -8,17 +8,25 @@ import com.example.rest_company.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  * author: Ulansky
  */
 @RestController
-public class AutApi {
+public class AuthApi {
     @Autowired
     private UserService userService;
     @Autowired
     private JwtProvider provider;
+
+    @PostMapping("/auth")
+    public AuthResponse auth(@RequestBody RegisterRequest request) {
+        User user = userService.findByEmailAndPassword(request.getEmail(), request.getPassword());
+        String token = provider.generaToken(user.getEmail());
+        return new AuthResponse(token);
+    }
 
     @PostMapping("/register")
     public String registerUser(@RequestBody RegisterRequest request) {
@@ -26,17 +34,7 @@ public class AutApi {
         user.setPassword(request.getPassword());
         user.setEmail(request.getEmail());
         userService.saveUser(user);
-        return "ok";
+        return "successfully";
     }
 
-    @PostMapping("/auth")
-    public AuthResponse auth(@RequestBody RegisterRequest request) {
-        System.out.println(1);
-        User user = userService.findByEmailAndPassword(request.getEmail(), request.getPassword());
-        System.out.println(2);
-        System.out.println(user);
-        String token = provider.generaToken(user.getEmail());
-        System.out.println(3);
-        return new AuthResponse(token);
-    }
 }
